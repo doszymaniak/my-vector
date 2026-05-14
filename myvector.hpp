@@ -31,6 +31,7 @@ public:
     void push_back(const T &el);
     void pop_back();
     void reserve(size_t n);
+    void resize(size_t n, const T &val);
 };
 
 #include "myvector.tpp"

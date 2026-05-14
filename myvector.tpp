@@ -116,3 +116,16 @@ void MyVector<T>::reserve(size_t n)
     if (capacity >= n) return;
     reallocate(n);
 }
+
+template <typename T>
+void MyVector<T>::resize(size_t n, const T &val)
+{
+    if (n < size)
+    {
+        size = n;
+        return;
+    }
+    if (n > capacity) reallocate(n);
+    for (size_t i = size; i < n; i++) vec[i] = val;
+    size = n;
+}

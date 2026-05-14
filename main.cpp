@@ -20,5 +20,8 @@ int main()
 
     v2.pop_back();
     v2.print("[- 7]: ");
+
+    v2.resize(10, 5);
+    v2.print("Resize to 10: ");
     return 0;
 }
