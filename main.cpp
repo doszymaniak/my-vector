@@ -23,5 +23,13 @@ int main()
 
     v2.resize(10, 5);
     v2.print("Resize to 10: ");
+
+    cout << "v2[6] (5): " << v2[6] << '\n';
+    
+    v2[6] = 7;
+    cout << "v2[6] = 7: " << v2[6] << '\n';
+
+    v2.at(4) = 15;
+    cout << "v2.at(4) = 15: " << v2[4] << '\n';
     return 0;
 }

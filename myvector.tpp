@@ -129,3 +129,29 @@ void MyVector<T>::resize(size_t n, const T &val)
     for (size_t i = size; i < n; i++) vec[i] = val;
     size = n;
 }
+
+template <typename T>
+T &MyVector<T>::operator[](size_t idx)
+{
+    return vec[idx];
+}
+
+template <typename T>
+const T &MyVector<T>::operator[](size_t idx) const
+{
+    return vec[idx];
+}
+
+template <typename T>
+T &MyVector<T>::at(size_t idx)
+{
+    if (idx >= size) throw out_of_range("Index out of range!");
+    return vec[idx];
+}
+
+template <typename T>
+const T &MyVector<T>::at(size_t idx) const
+{
+    if (idx >= size) throw out_of_range("Index out of range!");
+    return vec[idx];
+}

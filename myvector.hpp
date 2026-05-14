@@ -25,6 +25,8 @@ public:
     // Operators
     MyVector &operator=(const MyVector &other);
     MyVector &operator=(MyVector &&other);
+    T &operator[](size_t idx);
+    const T &operator[](size_t idx) const;
 
     // Other
     void reallocate(size_t min_cap);
@@ -32,6 +34,8 @@ public:
     void pop_back();
     void reserve(size_t n);
     void resize(size_t n, const T &val);
+    T &at(size_t idx);
+    const T &at(size_t idx) const;
 };
 
 #include "myvector.tpp"
