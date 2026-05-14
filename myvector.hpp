@@ -7,8 +7,8 @@
 template<typename T>
 class MyVector {
 private:
-    size_t size;
-    size_t capacity;
+    size_t m_size;
+    size_t m_capacity;
     T *vec;
 public:
     void print(const std::string &label) const;
@@ -36,6 +36,9 @@ public:
     void resize(size_t n, const T &val);
     T &at(size_t idx);
     const T &at(size_t idx) const;
+    size_t size() const;
+    size_t capacity() const;
+    bool empty() const;
 };
 
 #include "myvector.tpp"

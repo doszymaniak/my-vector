@@ -6,37 +6,37 @@ template <typename T>
 void MyVector<T>::print(const string &label) const
 {
     cout << label;
-    for (size_t i = 0; i < size; i++) cout << vec[i] << " ";
+    for (size_t i = 0; i < m_size; i++) cout << vec[i] << " ";
     cout << '\n';
 }
 
 template <typename T>
-MyVector<T>::MyVector(size_t cap) : size(0), capacity(cap), vec(new T[capacity]) {}
+MyVector<T>::MyVector(size_t cap) : m_size(0), m_capacity(cap), vec(new T[m_capacity]) {}
 
 template <typename T>
-MyVector<T>::MyVector() : size(0), capacity(10), vec(new T[capacity]) {}
+MyVector<T>::MyVector() : m_size(0), m_capacity(10), vec(new T[m_capacity]) {}
 
 template <typename T>
-MyVector<T>::MyVector(const MyVector &other) : size(other.size), capacity(other.capacity),
-vec(new T[capacity])
+MyVector<T>::MyVector(const MyVector &other) : m_size(other.m_size), m_capacity(other.m_capacity),
+vec(new T[m_capacity])
 {
-    for (size_t i = 0; i < size; i++) vec[i] = other.vec[i];
+    for (size_t i = 0; i < m_size; i++) vec[i] = other.vec[i];
 }
 
 template <typename T>
-MyVector<T>::MyVector(MyVector &&other) : size(other.size), capacity(other.capacity),
+MyVector<T>::MyVector(MyVector &&other) : m_size(other.m_size), m_capacity(other.m_capacity),
 vec(other.vec)
 {
     other.vec = nullptr;
-    other.capacity = 0;
-    other.size = 0;
+    other.m_capacity = 0;
+    other.m_size = 0;
 }
 
 template <typename T>
 MyVector<T>::~MyVector()
 {
-    capacity = 0;
-    size = 0;
+    m_capacity = 0;
+    m_size = 0;
     delete [] vec;
     vec = nullptr;
 }
@@ -45,10 +45,10 @@ template <typename T>
 MyVector<T> &MyVector<T>::operator=(const MyVector &other)
 {
     if (this == &other) return *this;
-    T *new_vec = new T[other.capacity];
+    T *new_vec = new T[other.m_capacity];
     try
     {
-        for (size_t i = 0; i < other.size; i++) new_vec[i] = other.vec[i];
+        for (size_t i = 0; i < other.m_size; i++) new_vec[i] = other.vec[i];
     }
     catch (...)
     {
@@ -57,8 +57,8 @@ MyVector<T> &MyVector<T>::operator=(const MyVector &other)
     }
     delete [] vec;
     vec = new_vec;
-    capacity = other.capacity;
-    size = other.size;
+    m_capacity = other.m_capacity;
+    m_size = other.m_size;
     return *this;
 }
 
@@ -68,30 +68,30 @@ MyVector<T> &MyVector<T>::operator=(MyVector &&other)
     if (this == &other) return *this;
     delete [] vec;
     vec = other.vec;
-    capacity = other.capacity;
-    size = other.size;
+    m_capacity = other.m_capacity;
+    m_size = other.m_size;
     other.vec = nullptr;
-    other.capacity = 0;
-    other.size = 0;
+    other.m_capacity = 0;
+    other.m_size = 0;
     return *this;
 }
 
 template <typename T>
 void MyVector<T>::reallocate(size_t min_cap)
 {
-    size_t new_capacity = (capacity == 0) ? 10 : capacity * 2;
+    size_t new_capacity = (m_capacity == 0) ? 10 : m_capacity * 2;
     if (new_capacity < min_cap) new_capacity = min_cap;
     T *new_vec = new T[new_capacity];
     try
     {
-        for (size_t i = 0; i < size; i++) new_vec[i] = vec[i];
+        for (size_t i = 0; i < m_size; i++) new_vec[i] = vec[i];
     }
     catch (...)
     {
         delete [] new_vec;
         throw;
     }
-    capacity = new_capacity;
+    m_capacity = new_capacity;
     delete [] vec;
     vec = new_vec;
 }
@@ -99,35 +99,35 @@ void MyVector<T>::reallocate(size_t min_cap)
 template <typename T>
 void MyVector<T>::push_back(const T &el)
 {
-    if (size + 1 > capacity) reallocate(size + 1);
-    vec[size++] = el;
+    if (m_size + 1 > m_capacity) reallocate(m_size + 1);
+    vec[m_size++] = el;
 }
 
 template <typename T>
 void MyVector<T>::pop_back()
 {
-    if (size == 0) return;
-    size--;
+    if (m_size == 0) return;
+    m_size--;
 }
 
 template <typename T>
 void MyVector<T>::reserve(size_t n)
 {
-    if (capacity >= n) return;
+    if (m_capacity >= n) return;
     reallocate(n);
 }
 
 template <typename T>
 void MyVector<T>::resize(size_t n, const T &val)
 {
-    if (n < size)
+    if (n < m_size)
     {
-        size = n;
+        m_size = n;
         return;
     }
-    if (n > capacity) reallocate(n);
-    for (size_t i = size; i < n; i++) vec[i] = val;
-    size = n;
+    if (n > m_capacity) reallocate(n);
+    for (size_t i = m_size; i < n; i++) vec[i] = val;
+    m_size = n;
 }
 
 template <typename T>
@@ -145,13 +145,31 @@ const T &MyVector<T>::operator[](size_t idx) const
 template <typename T>
 T &MyVector<T>::at(size_t idx)
 {
-    if (idx >= size) throw out_of_range("Index out of range!");
+    if (idx >= m_size) throw out_of_range("Index out of range!");
     return vec[idx];
 }
 
 template <typename T>
 const T &MyVector<T>::at(size_t idx) const
 {
-    if (idx >= size) throw out_of_range("Index out of range!");
+    if (idx >= m_size) throw out_of_range("Index out of range!");
     return vec[idx];
+}
+
+template <typename T>
+size_t MyVector<T>::size() const
+{
+    return m_size;
+}
+
+template <typename T>
+size_t MyVector<T>::capacity() const
+{
+    return m_capacity;
+}
+
+template <typename T>
+bool MyVector<T>::empty() const
+{
+    return (m_size == 0);
 }

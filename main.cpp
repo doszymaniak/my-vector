@@ -31,5 +31,12 @@ int main()
 
     v2.at(4) = 15;
     cout << "v2.at(4) = 15: " << v2[4] << '\n';
+
+    cout << "size (10): " << v2.size() << "\n";
+
+    cout << "capacity: " << v2.capacity() << '\n';
+
+    cout << "empty (v2): ";
+    v2.empty() ? cout << "empty\n" : cout << "not empty\n";
     return 0;
 }
