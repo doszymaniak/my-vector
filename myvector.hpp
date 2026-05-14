@@ -39,6 +39,12 @@ public:
     size_t size() const;
     size_t capacity() const;
     bool empty() const;
+
+    // Iterators
+    T* begin();
+    const T* begin() const;
+    T* end();
+    const T* end() const;
 };
 
 #include "myvector.tpp"

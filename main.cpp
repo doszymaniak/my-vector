@@ -38,5 +38,9 @@ int main()
 
     cout << "empty (v2): ";
     v2.empty() ? cout << "empty\n" : cout << "not empty\n";
+
+    cout << "iterators: ";
+    for (auto it = v2.begin(); it != v2.end(); it++) cout << *it << " ";
+    cout << '\n';
     return 0;
 }

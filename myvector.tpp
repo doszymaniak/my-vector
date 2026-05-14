@@ -173,3 +173,27 @@ bool MyVector<T>::empty() const
 {
     return (m_size == 0);
 }
+
+template <typename T>
+T *MyVector<T>::begin() 
+{
+    return vec;
+}
+
+template <typename T>
+const T *MyVector<T>::begin() const
+{
+    return vec;
+}
+
+template <typename T>
+T *MyVector<T>::end()
+{
+    return vec + m_size;
+}
+
+template <typename T>
+const T *MyVector<T>::end() const
+{
+    return vec + m_size;
+}
