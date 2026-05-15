@@ -16,6 +16,7 @@ public:
     // Constructors
     MyVector(size_t cap);
     MyVector();
+    MyVector(std::initializer_list<T> l);
     MyVector(const MyVector &other);
     MyVector(MyVector &&other);
 
@@ -39,6 +40,7 @@ public:
     size_t size() const;
     size_t capacity() const;
     bool empty() const;
+    void clear();
 
     // Iterators
     T* begin();

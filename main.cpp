@@ -42,5 +42,8 @@ int main()
     cout << "iterators: ";
     for (auto it = v2.begin(); it != v2.end(); it++) cout << *it << " ";
     cout << '\n';
+
+    MyVector<int> v3({1, 2, 3});
+    v3.print("Initialized with list: ");
     return 0;
 }

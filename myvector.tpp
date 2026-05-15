@@ -17,6 +17,13 @@ template <typename T>
 MyVector<T>::MyVector() : m_size(0), m_capacity(10), vec(new T[m_capacity]) {}
 
 template <typename T>
+MyVector<T>::MyVector(initializer_list<T> l) : m_size(l.size()), m_capacity(l.size()), vec(new T[m_capacity])
+{
+    size_t idx = 0;
+    for (auto &el : l) vec[idx++] = el;
+}
+
+template <typename T>
 MyVector<T>::MyVector(const MyVector &other) : m_size(other.m_size), m_capacity(other.m_capacity),
 vec(new T[m_capacity])
 {
@@ -172,6 +179,12 @@ template <typename T>
 bool MyVector<T>::empty() const
 {
     return (m_size == 0);
+}
+
+template <typename T>
+void MyVector<T>::clear()
+{
+    m_size = 0;
 }
 
 template <typename T>
