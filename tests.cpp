@@ -95,6 +95,6 @@ int main()
     test_empty();
     test_clear();
     test_iterator();
-    cout << "ALL TESTS PASSED!\n";
+    std::cout << "ALL TESTS PASSED!\n";
     return 0;
 }
